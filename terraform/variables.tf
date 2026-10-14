@@ -1,6 +1,5 @@
-cat << 'EOF' > variables.tf
 variable "aws_region" {
-  description = "Región permitida en AWS Learner Lab"
+  description = "Region permitida en AWS Learner Lab"
   type        = string
   default     = "us-east-1"
 }
@@ -36,9 +35,8 @@ variable "db_username" {
 }
 
 variable "db_password" {
-  description = "Contraseña maestra de RDS MySQL"
+  description = "Contrasena maestra de RDS MySQL"
   type        = string
   default     = "FreshBox2025!"
   sensitive   = true
 }
-EOF

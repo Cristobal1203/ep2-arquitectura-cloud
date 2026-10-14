@@ -1,4 +1,3 @@
-cat << 'EOF' > alb.tf
 resource "aws_lb" "alb" {
   name               = "${var.project_name}-alb"
   internal           = false
@@ -40,9 +39,8 @@ resource "aws_lb_listener" "http" {
   }
 }
 
-# Vincula automáticamente los nodos del Node Group de EKS al Target Group del ALB
+# vincula automaticamente los nodos del Node Group de EKS al Target Group del ALB
 resource "aws_autoscaling_attachment" "eks_to_alb" {
   autoscaling_group_name = aws_eks_node_group.main.resources[0].autoscaling_groups[0].name
   lb_target_group_arn    = aws_lb_target_group.eks_tg.arn
 }
-EOF

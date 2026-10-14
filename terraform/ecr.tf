@@ -1,4 +1,3 @@
-cat << 'EOF' > ecr.tf
 locals {
   ecr_repositories = [
     "freshbox/frontend",
@@ -23,4 +22,3 @@ resource "aws_ecr_repository" "microservices" {
     Name = each.value
   }
 }
-EOF

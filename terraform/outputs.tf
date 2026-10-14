@@ -1,4 +1,3 @@
-cat << 'EOF' > outputs.tf
 output "alb_url" {
   description = "URL publica del Application Load Balancer"
   value       = "http://${aws_lb.alb.dns_name}"
@@ -13,4 +12,3 @@ output "eks_cluster_name" {
   description = "Nombre del cluster Amazon EKS"
   value       = aws_eks_cluster.main.name
 }
-EOF

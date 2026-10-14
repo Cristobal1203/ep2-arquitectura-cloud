@@ -1,4 +1,3 @@
-cat << 'EOF' > security.tf
 # 1. Security Group Capa 1: Application Load Balancer (ALB)
 resource "aws_security_group" "alb" {
   name        = "${var.project_name}-sg-alb"
@@ -33,7 +32,7 @@ resource "aws_security_group" "alb" {
   }
 }
 
-# 2. Security Group Capa 2: EKS Aplicación
+# 2. Security Group Capa 2: EKS Aplicacion
 resource "aws_security_group" "eks" {
   name        = "${var.project_name}-sg-eks"
   description = "Capa 2 Privada App: Permite trafico desde SG del ALB y comunicacion interna EKS"
@@ -108,4 +107,3 @@ resource "aws_security_group" "rds" {
     Name = "${var.project_name}-sg-rds"
   }
 }
-EOF

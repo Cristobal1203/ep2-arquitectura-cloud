@@ -1,4 +1,3 @@
-cat << 'EOF' > vpc.tf
 # 1. VPC Principal (/22)
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr
@@ -10,7 +9,7 @@ resource "aws_vpc" "main" {
   }
 }
 
-# 2. Internet Gateway para la Capa 1 Pública
+# 2. Internet Gateway para la Capa 1 Publica
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
 
@@ -19,7 +18,7 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
-# 3. CAPA 1: 2 Subredes Públicas (AZ 1a y AZ 1b)
+# 3. CAPA 1: 2 Subredes Publicas (AZ 1a y AZ 1b)
 resource "aws_subnet" "public_1a" {
   vpc_id                  = aws_vpc.main.id
   cidr_block              = "10.0.0.0/25"
@@ -44,7 +43,7 @@ resource "aws_subnet" "public_1b" {
   }
 }
 
-# 4. CAPA 2: 2 Subredes Privadas de Aplicación para EKS (AZ 1a y AZ 1b)
+# 4. CAPA 2: 2 Subredes Privadas de Aplicacion para EKS (AZ 1a y AZ 1b)
 resource "aws_subnet" "private_app_1a" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.1.0/24"
@@ -88,7 +87,7 @@ resource "aws_subnet" "private_data_1b" {
   }
 }
 
-# 6. Elastic IP y NAT Gateway para salida controlada a Internet desde las capas privadas
+# 6. Elastic IP y NAT Gateway para salida controlada a Internet
 resource "aws_eip" "nat" {
   domain = "vpc"
 
@@ -108,7 +107,7 @@ resource "aws_nat_gateway" "nat" {
   depends_on = [aws_internet_gateway.igw]
 }
 
-# 7. Tabla de Enrutamiento Pública (hacia IGW)
+# 7. Tabla de Enrutamiento Publica (hacia IGW)
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
@@ -165,4 +164,3 @@ resource "aws_route_table_association" "private_data_1b" {
   subnet_id      = aws_subnet.private_data_1b.id
   route_table_id = aws_route_table.private.id
 }
-EOF

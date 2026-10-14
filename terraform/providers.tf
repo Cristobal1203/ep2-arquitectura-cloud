@@ -1,4 +1,3 @@
-cat << 'EOF' > providers.tf
 terraform {
   required_version = ">= 1.3.0"
   required_providers {
@@ -17,4 +16,3 @@ provider "aws" {
 data "aws_iam_role" "lab_role" {
   name = var.lab_role_name
 }
-EOF
