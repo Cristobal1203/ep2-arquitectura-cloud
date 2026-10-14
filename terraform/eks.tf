@@ -1,8 +1,7 @@
-# 1. Cluster administrado Amazon EKS
+# 1. Cluster administrado Amazon EKS (usa automaticamente la version estable actual de AWS)
 resource "aws_eks_cluster" "main" {
   name     = "${var.project_name}-eks-cluster"
   role_arn = data.aws_iam_role.lab_role.arn
-  version  = "1.29"
 
   vpc_config {
     subnet_ids              = [aws_subnet.private_app_1a.id, aws_subnet.private_app_1b.id]
@@ -49,7 +48,6 @@ resource "aws_launch_template" "eks_nodes" {
     }
   }
 
-  # Incluimos tanto nuestro SG de capa EKS como el SG interno del cluster para que los nodos se unan sin error
   vpc_security_group_ids = [
     aws_security_group.eks.id,
     aws_eks_cluster.main.vpc_config[0].cluster_security_group_id
@@ -71,7 +69,7 @@ resource "aws_eks_node_group" "main" {
   subnet_ids      = [aws_subnet.private_app_1a.id, aws_subnet.private_app_1b.id]
 
   instance_types = ["t3.small"]
-  ami_type       = "AL2_x86_64"
+  ami_type       = "AL2023_x86_64_STANDARD"
 
   launch_template {
     id      = aws_launch_template.eks_nodes.id

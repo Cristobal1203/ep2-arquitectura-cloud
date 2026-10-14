@@ -8,7 +8,7 @@ resource "aws_db_subnet_group" "rds_subnets" {
 }
 
 resource "aws_db_instance" "mysql" {
-  identifier              = "${var.project_name}-mysql"
+  identifier              = "${var.project_name}-mysql-ep2"
   engine                  = "mysql"
   engine_version          = "8.0"
   instance_class          = "db.t4g.small"
